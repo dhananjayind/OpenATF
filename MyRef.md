@@ -109,3 +109,163 @@ This looks professional and works well with release tooling.
 Let's complete these Git steps first. Once done, every new feature (like PluginManager, AI Engine, Salesforce Plugin) will be developed in its own feature branch, raised as a PR into develop, reviewed, merged, and only then become part of the main codebase.
 
 That's exactly how you'd work on a real enterprise team.
+
+Ye final architecture hoga
+
+                +----------------------+
+                |      User/Input      |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                |   Command Processor  |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                |      AI Planner      |
+                | (LLM Understands)    |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                |     Plan Builder     |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                |    Plugin Manager    |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                |  Execution Engine     |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                | Browser / API / App  |
+                +----------------------+
+
+
+                ________________________________________
+
+Final Development Roadmap
+Phase 1 ✅ (Done)
+Project setup
+Folder structure
+Command Processor
+Workflow Engine
+Execution Engine
+Browser Manager
+Playwright Adapter
+Git workflow
+Phase 2 (Current)
+
+🟢 AI Core
+
+AI Planner
+Prompt Builder
+LLM Client (Qwen)
+Response Parser
+Plan Builder
+Phase 3
+
+🟢 Plugin System
+
+Plugin Interface
+Web Plugin
+Salesforce Plugin
+SAP Plugin
+Phase 4
+
+🟢 Execution
+
+Browser
+API
+Mobile
+Phase 5
+
+🟢 Self Healing
+
+Locator Healing
+Retry Engine
+Root Cause Analysis
+Phase 6
+
+🟢 Reporting
+
+HTML
+JSON
+Screenshots
+Videos
+AI Summary
+Phase 7
+
+🟢 Integrations
+
+Jira
+Azure DevOps
+GitHub
+Slack
+Email
+
+
+
+OpenATF:
+Requirement
+      ↓
+AI Understands
+      ↓
+AI Creates Plan
+      ↓
+AI Selects Plugin
+      ↓
+Execution Engine
+      ↓
+Platform
+      ↓
+Validation
+      ↓
+Report
+      ↓
+AI Analysis
+
+
+
+OpenATF v1 Architecture
+OpenATF
+│
+├── Core
+│     ├── Command Processor
+│     ├── AI Planner
+│     ├── Plan Builder
+│     ├── Plugin Manager
+│     ├── Execution Engine
+│     ├── Browser Manager
+│     └── Report Manager
+│
+├── AI
+│     ├── LLM Client
+│     ├── Prompt Builder
+│     ├── Response Parser
+│     ├── Memory
+│     └── Validator
+│
+├── Plugins
+│     ├── Web
+│     ├── Salesforce
+│     ├── SAP
+│     ├── Mobile
+│     └── API
+│
+├── Adapters
+│     ├── Playwright
+│     ├── Appium
+│     └── REST
+│
+├── Reporting
+│
+├── Utilities
+│
+└── Config

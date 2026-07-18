@@ -20,23 +20,23 @@ export class ExecutionService {
      * @param workflowName Name of the workflow to execute
      */
     public async execute(request: ExecutionRequest): Promise<void> {
-// Browser lifecycle
-const browserManager = new BrowserManager();
+        // Browser lifecycle
+        const browserManager = new BrowserManager();
 
-await browserManager.launch();
+        await browserManager.launch();
 
-// Get current page
-const page = browserManager.getPage();
+        // Get current page
+        const page = browserManager.getPage();
 
-// Browser actions
-const playwrightAdapter = new PlaywrightAdapter();
+        // Browser actions
+        const playwrightAdapter = new PlaywrightAdapter();
 
-await playwrightAdapter.openUrl(page, request.url);
+        await playwrightAdapter.openUrl(page, request.url);
 
-await playwrightAdapter.printTitle(page);
+        await playwrightAdapter.printTitle(page);
 
-// Close browser
-await browserManager.close();
+        // Close browser
+        await browserManager.close();
         // Future:
         // 1. Initialize browser
         // 2. Execute workflow steps
