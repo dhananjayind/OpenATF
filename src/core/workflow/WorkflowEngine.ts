@@ -1,6 +1,7 @@
 import { ExecutionService } from "../execution/ExecutionService";
 import { ExecutionRequest } from "../../shared/models/ExecutionRequest";
 import { WebPlugin } from "../plugin/web/WebPlugin";
+import { PluginManager } from "../plugin/PluginManager";
 
 /**
  * WorkflowEngine
@@ -30,8 +31,11 @@ export class WorkflowEngine {
          * after understanding the user's command.
          */
 
+        // Create Plugin Manager
+        const pluginManager = new PluginManager();
+
         // Load Web Plugin
-        const webPlugin = new WebPlugin();
+        const webPlugin = pluginManager.getPlugin("web");
 
         // Build execution request
         const request = webPlugin.getExecutionRequest();
