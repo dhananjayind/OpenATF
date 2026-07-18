@@ -1,5 +1,7 @@
 
-import { ExecutionRequest } from "../../../shared/models/ExecutionRequest";
+import { ExecutionRequest } from "../../shared/models/ExecutionRequest";
+import { IPlugin } from "../../shared/interfaces/IPlugin";
+
 
 /**
  * WebPlugin
@@ -14,7 +16,7 @@ import { ExecutionRequest } from "../../../shared/models/ExecutionRequest";
  * - Read browser
  * - Read credentials
  */
-export class WebPlugin {
+export class WebPlugin implements IPlugin {
 
     /**
      * Build execution request.
