@@ -1,42 +1,45 @@
-import { Browser, BrowserContext, chromium, Page } from "playwright";
+import { chromium, Browser, BrowserContext, Page } from "playwright";
 
 /**
  * BrowserManager
  *
  * Responsibility:
  * ----------------
- * Manage browser lifecycle.
- *
- * It is responsible for:
- * - Launching browser
- * - Creating browser context
- * - Creating page
- * - Closing browser
+ * Manages browser lifecycle.
  */
 export class BrowserManager {
 
-    private browser!: Browser;
-    private context!: BrowserContext;
-    private page!: Page;
+        private browser!: Browser;
+        private context!: BrowserContext;
+         private page!: Page;
 
     /**
-     * Launch Chromium browser.
+     * Launches browser and returns browser session.
      */
-    public async launch(): Promise<void> {
+    public async launchBrowser(): Promise<{
+        browser: Browser;
+        context: BrowserContext;
+        page: Page;
+    }> {
 
-        console.log("Launching Browser...");
+        console.log("Launching browser...");
 
-        this.browser = await chromium.launch({
+        const browser = await chromium.launch({
             headless: false
         });
 
-        this.context = await this.browser.newContext();
+        const context = await browser.newContext();
 
-        this.page = await this.context.newPage();
+        const page = await context.newPage();
 
+        return {
+            browser,
+            context,
+            page
+        };
     }
 
-    /**
+        /**
      * Returns current page.
      */
     public getPage(): Page {
@@ -44,16 +47,16 @@ export class BrowserManager {
         return this.page;
 
     }
-
     /**
-     * Close browser.
+     * Closes browser.
+     *
+     * @param browser Active browser instance
      */
-    public async close(): Promise<void> {
+    public async close(browser: Browser): Promise<void> {
 
-        console.log("Closing Browser...");
+        console.log("Closing browser...");
 
-        await this.browser.close();
-
+        await browser.close();
     }
 
 }

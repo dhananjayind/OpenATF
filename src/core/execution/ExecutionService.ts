@@ -1,47 +1,37 @@
 import { BrowserManager } from "./BrowserManager";
 import { PlaywrightAdapter } from "../../adapters/playwright/PlaywrightAdapter";
 import { ExecutionRequest } from "../../shared/models/ExecutionRequest";
+
 /**
  * ExecutionService
  *
  * Responsibility:
  * ----------------
- * This class is responsible for executing a workflow.
+ * Executes the requested workflow.
  *
  * NOTE:
- * It does NOT know how browser automation works.
- * It simply starts the execution process.
+ * This class coordinates execution only.
+ * Browser operations are delegated to BrowserManager.
+ * Browser actions are delegated to PlaywrightAdapter.
  */
 export class ExecutionService {
 
     /**
-     * Execute the workflow.
-     *
-     * @param workflowName Name of the workflow to execute
+     * Executes workflow.
      */
     public async execute(request: ExecutionRequest): Promise<void> {
-// Browser lifecycle
-const browserManager = new BrowserManager();
 
-await browserManager.launch();
+        const browserManager = new BrowserManager();
 
-// Get current page
-const page = browserManager.getPage();
+        const { browser, page } = await browserManager.launchBrowser();
 
-// Browser actions
-const playwrightAdapter = new PlaywrightAdapter();
+        const playwrightAdapter = new PlaywrightAdapter();
 
-await playwrightAdapter.openUrl(page, request.url);
+        await playwrightAdapter.openUrl(page, request.url);
 
-await playwrightAdapter.printTitle(page);
+        await playwrightAdapter.printTitle(page);
 
-// Close browser
-await browserManager.close();
-        // Future:
-        // 1. Initialize browser
-        // 2. Execute workflow steps
-        // 3. Collect execution result
-        // 4. Return report
+        await browserManager.close(browser);
 
     }
 
