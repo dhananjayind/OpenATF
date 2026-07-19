@@ -1,3 +1,4 @@
+import { AIPlanner } from "../../ai/planner/AIPlanner";
 import { ExecutionService } from "../execution/ExecutionService";
 import { PluginManager } from "../plugin/PluginManager";
 
@@ -30,8 +31,11 @@ export class WorkflowEngine {
         // Load Web Plugin
         const plugin = pluginManager.getPlugin("web");
 
+        const aiPlanner = new AIPlanner();
+
+        const plan = aiPlanner.createPlan(command);
         // Build execution request
-        const request = plugin.getExecutionRequest();
+       const request = plugin.getExecutionRequest(plan);
 
         // Execute request
         const executionService = new ExecutionService();

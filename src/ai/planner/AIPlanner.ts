@@ -35,22 +35,31 @@ export class AIPlanner {
          * TODO:
          * Replace this hardcoded plan with LLM response.
          */
-        const plan: ExecutionPlan = {
+       const lowerCommand = command.toLocaleLowerCase();
 
-            goal: "Execute Login Test",
+       let workflow ="";
+       let country = "";
+       let environment = "";
 
-            plugin: "web",
+       if (lowerCommand.includes("login")){
 
-            workflow: "Login",
+        workflow = "Login";
+       }
+       if(lowerCommand.includes("germany")){
+        country ="Germany";
+       }
+       if(lowerCommand.includes("uat")){
+        environment = "UAT";
+       }
 
-            application: "Salesforce",
-
-            country: "Germany",
-
-            environment: "UAT"
-
-        };
-
+       const plan: ExecutionPlan ={
+        goal: command,
+        plugin:"web",
+        workflow,
+        application: "Salesforce",
+        country,
+        environment
+       };
         console.log("Execution Plan Created.");
 
         return plan;

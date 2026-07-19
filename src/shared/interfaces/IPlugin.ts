@@ -1,3 +1,4 @@
+import { ExecutionPlan } from "../../ai/model/ExecutionPlan";
 import { ExecutionRequest } from "../models/ExecutionRequest";
 
 /**
@@ -21,6 +22,6 @@ export interface IPlugin {
      * Returns all details required by
      * the Execution Service.
      */
-    getExecutionRequest(): ExecutionRequest;
+    getExecutionRequest(plan: ExecutionPlan): ExecutionRequest;
 
 }
