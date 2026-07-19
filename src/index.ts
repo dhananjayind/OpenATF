@@ -10,7 +10,7 @@ async function main(): Promise<void> {
     const commandProcessor = new CommandProcessor();
 
     // Process user command
-    await commandProcessor.process("Run Login Test");
+    await commandProcessor.process("Run Login Test Germany UAT");
 
 }
 
